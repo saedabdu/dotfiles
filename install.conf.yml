@@ -1,0 +1,19 @@
+- defaults:
+    link:
+      force: true
+      create: true
+      relink: true
+
+# Check the home dir for dead symlinks into dotfiles and delete them
+- clean: ['~']
+
+- link:
+    ~/.bashrc: 'bash/bashrc'
+    ~/.profile: 'bash/profile'
+    ~/.bash_profile: 'bash/bash_profile'
+    ~/.bash_aliases: 'bash/bash_aliases'
+    ~/.bash-git-prompt: bash/bash-git-prompt/
+ 
+- shell:
+  - [git submodule update --init --recursive, Installing submodules]
+  - vim +PluginInstall +qall
