@@ -1,0 +1,26 @@
+# Editor swapfiles
+.*.sw?
+*~
+vim
+
+# Sublime stuff
+*.sublime*
+
+# Syn
+.sy*
+.st*
+
+# Private
+*private*
+*.logs
+
+# Config
+etc
+config
+#dotbot
+
+# SSH
+ssh
+
+# Misc
+*.old
