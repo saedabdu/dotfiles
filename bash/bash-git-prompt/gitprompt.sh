@@ -12,11 +12,11 @@ function git_prompt_dir() {
   if [ -z "$__GIT_PROMPT_DIR" ]; then
     local SOURCE="${BASH_SOURCE[0]}"
     while [ -h "$SOURCE" ]; do
-      local DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+      local DIR="$( command cd -P "$( dirname "$SOURCE" )" && pwd )"
       SOURCE="$(readlink "$SOURCE")"
       [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE"
     done
-    __GIT_PROMPT_DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+    __GIT_PROMPT_DIR="$( command cd -P "$( dirname "$SOURCE" )" && pwd )"
   fi
 }
 
@@ -109,7 +109,7 @@ function git_prompt_list_themes() {
 
 function git_prompt_make_custom_theme() {
   if [[ -r "${HOME}/.git-prompt-colors.sh" ]]; then
-    echoc ${Red} "You alread have created a custom theme!"
+    echoc ${Red} "You have already created a custom theme!"
   else
     git_prompt_dir
 
@@ -303,8 +303,9 @@ function setLastCommandState() {
 function we_are_on_repo() {
   if [[ -e "$(git rev-parse --git-dir 2> /dev/null)" ]]; then
     echo 1
+  else
+    echo 0
   fi
-  echo 0
 }
 
 function update_old_git_prompt() {
@@ -345,9 +346,12 @@ function setGitPrompt() {
   OLD_GIT_PROMPT_SHOW_UNTRACKED_FILES=${GIT_PROMPT_SHOW_UNTRACKED_FILES}
   unset GIT_PROMPT_SHOW_UNTRACKED_FILES
 
+  OLD_GIT_PROMPT_IGNORE_SUBMODULES=${GIT_PROMPT_IGNORE_SUBMODULES}
+  unset GIT_PROMPT_IGNORE_SUBMODULES
+
   if [[ -e "$repo/.bash-git-rc" ]]; then
     # The config file can only contain variable declarations on the form A_B=0 or G_P=all
-    local CONFIG_SYNTAX="^(FETCH_REMOTE_STATUS|GIT_PROMPT_SHOW_UNTRACKED_FILES|GIT_PROMPT_IGNORE)=[0-9a-z]+$"
+    local CONFIG_SYNTAX="^(FETCH_REMOTE_STATUS|GIT_PROMPT_SHOW_UNTRACKED_FILES|GIT_PROMPT_IGNORE_SUBMODULES|GIT_PROMPT_IGNORE)=[0-9a-z]+$"
     if egrep -q -v "$CONFIG_SYNTAX" "$repo/.bash-git-rc"; then
       echo ".bash-git-rc can only contain variable values on the form NAME=value. Ignoring file." >&2
     else
@@ -359,6 +363,11 @@ function setGitPrompt() {
     GIT_PROMPT_SHOW_UNTRACKED_FILES=${OLD_GIT_PROMPT_SHOW_UNTRACKED_FILES}
   fi
   unset OLD_GIT_PROMPT_SHOW_UNTRACKED_FILES
+
+  if [ -z "${GIT_PROMPT_IGNORE_SUBMODULES}" ]; then
+    GIT_PROMPT_IGNORE_SUBMODULES=${OLD_GIT_PROMPT_IGNORE_SUBMODULES}
+  fi
+  unset OLD_GIT_PROMPT_IGNORE_SUBMODULES
 
   if [[ "$GIT_PROMPT_IGNORE" = 1 ]]; then
     PS1="$EMPTY_PROMPT"
@@ -424,7 +433,7 @@ function checkUpstream() {
   then
     if [[ -n $(git remote show) ]]; then
       (
-        async_run "git fetch --quiet"
+        async_run "GIT_TERMINAL_PROMPT=0 git fetch --quiet"
         disown -h
       )
     fi
@@ -475,9 +484,10 @@ function updatePrompt() {
 
   export __GIT_PROMPT_IGNORE_STASH=${GIT_PROMPT_IGNORE_STASH}
   export __GIT_PROMPT_SHOW_UPSTREAM=${GIT_PROMPT_SHOW_UPSTREAM}
+  export __GIT_PROMPT_IGNORE_SUBMODULES=${GIT_PROMPT_IGNORE_SUBMODULES}
 
   if [ -z "${GIT_PROMPT_SHOW_UNTRACKED_FILES}" ]; then
-    export __GIT_PROMPT_SHOW_UNTRACKED_FILES=all
+    export __GIT_PROMPT_SHOW_UNTRACKED_FILES=normal
   else
     export __GIT_PROMPT_SHOW_UNTRACKED_FILES=${GIT_PROMPT_SHOW_UNTRACKED_FILES}
   fi
@@ -519,7 +529,15 @@ function updatePrompt() {
 
   local NEW_PROMPT="$EMPTY_PROMPT"
   if [[ -n "$git_status_fields" ]]; then
-    local STATUS_PREFIX="${PROMPT_LEADING_SPACE}${GIT_PROMPT_PREFIX}${GIT_PROMPT_BRANCH}\${GIT_BRANCH}${ResetColor}${GIT_FORMATTED_UPSTREAM}"
+
+    case "$GIT_BRANCH" in
+      $GIT_PROMPT_MASTER_BRANCHES)
+        local STATUS_PREFIX="${PROMPT_LEADING_SPACE}${GIT_PROMPT_PREFIX}${GIT_PROMPT_MASTER_BRANCH}\${GIT_BRANCH}${ResetColor}${GIT_FORMATTED_UPSTREAM}"
+        ;;
+      *)
+        local STATUS_PREFIX="${PROMPT_LEADING_SPACE}${GIT_PROMPT_PREFIX}${GIT_PROMPT_BRANCH}\${GIT_BRANCH}${ResetColor}${GIT_FORMATTED_UPSTREAM}"
+        ;;
+    esac
     local STATUS=""
 
     # __add_status KIND VALEXPR INSERT
@@ -553,12 +571,12 @@ function updatePrompt() {
     __chk_gitvar_status 'REMOTE'     '-n'
     if [[ $GIT_CLEAN -eq 0 ]] || [[ $GIT_PROMPT_CLEAN != "" ]]; then
       __add_status        "$GIT_PROMPT_SEPARATOR"
-      __chk_gitvar_status 'STAGED'     '-ne 0'
-      __chk_gitvar_status 'CONFLICTS'  '-ne 0'
-      __chk_gitvar_status 'CHANGED'    '-ne 0'
-      __chk_gitvar_status 'UNTRACKED'  '-ne 0'
-      __chk_gitvar_status 'STASHED'    '-ne 0'
-      __chk_gitvar_status 'CLEAN'      '-eq 1'   -
+      __chk_gitvar_status 'STAGED'     '!= "0" -a $GIT_STAGED != "^"'
+      __chk_gitvar_status 'CONFLICTS'  '!= "0"'
+      __chk_gitvar_status 'CHANGED'    '!= "0"'
+      __chk_gitvar_status 'UNTRACKED'  '!= "0"'
+      __chk_gitvar_status 'STASHED'    '!= "0"'
+      __chk_gitvar_status 'CLEAN'      '= "1"'   -
     fi
     __add_status        "$ResetColor$GIT_PROMPT_SUFFIX"
 
@@ -578,6 +596,10 @@ function gp_add_virtualenv_to_prompt {
   local VENV=""
   if [[ -n "$VIRTUAL_ENV" && -z "${VIRTUAL_ENV_DISABLE_PROMPT-}" ]]; then
     VENV=$(basename "${VIRTUAL_ENV}")
+    ACCUMULATED_VENV_PROMPT="${ACCUMULATED_VENV_PROMPT}${GIT_PROMPT_VIRTUALENV//_VIRTUALENV_/${VENV}}"
+  fi
+  if [[ -n "$NODE_VIRTUAL_ENV" && -z "${NODE_VIRTUAL_ENV_DISABLE_PROMPT-}" ]]; then
+    VENV=$(basename "${NODE_VIRTUAL_ENV}")
     ACCUMULATED_VENV_PROMPT="${ACCUMULATED_VENV_PROMPT}${GIT_PROMPT_VIRTUALENV//_VIRTUALENV_/${VENV}}"
   fi
   if [[ -n "$CONDA_DEFAULT_ENV" ]]; then
@@ -634,6 +656,8 @@ function gp_install_prompt {
   if [ -z "$PROMPT_COMMAND" ]; then
     PROMPT_COMMAND=setGitPrompt
   else
+    PROMPT_COMMAND="${PROMPT_COMMAND//$'\n'/;}" # convert all new lines to semi-colons
+    PROMPT_COMMAND=${PROMPT_COMMAND#\;}; # remove leading semi-colon
     PROMPT_COMMAND=${PROMPT_COMMAND%% }; # remove trailing spaces
     PROMPT_COMMAND=${PROMPT_COMMAND%\;}; # remove trailing semi-colon
 
