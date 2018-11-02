@@ -32,6 +32,9 @@ fi
 # Set the default editor to vim.
 export EDITOR=vim
 
+# VCode move file to trash upon delete
+export ELECTRON_TRASH=gio
+
 #======================#
 # Bash Prompt          #
 #======================#
