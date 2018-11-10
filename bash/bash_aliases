@@ -77,3 +77,16 @@ fi
 	alias netestablishedtcp="sudo netstat -an | grep -Ec '^tcp.+ESTABLISHED$'"
 	alias listenports="netstat -anp --tcp --udp | grep LISTEN"
 	alias openports="sudo netstat -ltun"
+
+helmins() {
+ kubectl -n kube-system create serviceaccount tiller
+ kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount=kube-system:tiller
+ helm init --service-account=tiller
+}
+
+helmdel() {
+ kubectl -n kube-system delete deployment tiller-deploy
+ kubectl delete clusterrolebinding tiller
+ kubectl -n kube-system delete serviceaccount tiller
+
+}
