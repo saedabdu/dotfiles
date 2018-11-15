@@ -8,9 +8,8 @@
 #==================#
 # Add Aliases      #
 #==================#
-
-GRC=$(which grc)
-if [ -n GRC ]; then
+if [ -x "$(grc)" ]; then
+    GRC=$(which grc)
     alias colourify='$GRC -es --colour=auto'
     alias as='colourify as'
 fi
@@ -58,10 +57,11 @@ if [ -f /etc/bash_completion ]; then
    . /etc/bash_completion
 fi
 
-# Search PKGs not found.
+# Search PKGs not found
 if [ -f /usr/share/doc/pkgfile/command-not-found.bash ]; then
 source /usr/share/doc/pkgfile/command-not-found.bash
 fi
+
 #======================#
 # History              #
 #======================#
