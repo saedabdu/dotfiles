@@ -8,8 +8,8 @@
 #==================#
 # Add Aliases      #
 #==================#
-if [ -x "$(grc)" ]; then
-    GRC=$(which grc)
+GRC=$(which grc)
+if [ -n GRC ]; then
     alias colourify='$GRC -es --colour=auto'
     alias as='colourify as'
 fi

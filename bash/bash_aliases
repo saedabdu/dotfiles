@@ -3,15 +3,10 @@
 #
 
 # Colorization, use GRC for additionnal colorization
-if [ -x "$(grc)" ]; then
-	GRC=$(which grc)
+GRC=$(which grc)
+if [ -n GRC ]; then
     alias colourify='$GRC -es --colour=auto'
-	# Build
-    alias configure='colourify ./configure'
-    alias ld='colourify ld'
-    alias make='colourify make'
-    alias gcc='colourify gcc'
-    # Log
+	# Log
     alias diff='colourify diff'
     alias ls='colourify ls'
     alias ps='colourify ps'
