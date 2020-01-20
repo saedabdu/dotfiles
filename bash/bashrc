@@ -35,6 +35,12 @@ export EDITOR=vim
 export ELECTRON_TRASH=gio
 
 #======================#
+# Browser              #
+#======================#
+
+export BROWSER=chromium
+
+#======================#
 # Bash Prompt          #
 #======================#
 
@@ -71,14 +77,16 @@ bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
 
 # Enable timed bash logging.
-#export HISTTIMEFORMAT="%F %T "
+export HISTTIMEFORMAT="%F %T "
 
 # Avoid History duplicates
 export HISTCONTROL=ignoredups:erasedups
 
-# Append to the history file, don't overwrite it.
+# When the shell exits, append to the history file instead of overwriting it
 shopt -s histappend
-PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
+
+# After each command, append to the history file and reread it
+PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
 
 # Store multiline commands as one line.
 shopt -s cmdhist
@@ -86,3 +94,4 @@ shopt -s cmdhist
 # Spellcheck directories.
 shopt -s dirspell
 
+. $HOME/.profile
