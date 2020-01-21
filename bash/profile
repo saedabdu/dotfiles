@@ -45,3 +45,4 @@ PATH=$PATH:$HOME/.rvm/bin
 
 # RVM Bash Completion
 [[ -r /usr/local/rvm/scripts/completion ]] && . /usr/local/rvm/scripts/completion
+
