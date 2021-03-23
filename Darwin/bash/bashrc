@@ -1,0 +1,96 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything.
+[[ $- != *i* ]] && return
+
+#==================#
+# Add Aliases      #
+#==================#
+GRC=$(which grc)
+if [ -n GRC ]; then
+    alias colourify='$GRC -es --colour=auto'
+    alias as='colourify as'
+fi
+
+# add aliases
+if [ -e ~/.bash_aliases ]; then
+    source ~/.bash_aliases
+fi
+
+# add private aliases if found
+if [ -e ~/.bash_private_aliases ]; then
+    source ~/.bash_private_aliases
+fi
+
+#=====================#
+# Editor              #
+#=====================#
+
+# Set the default editor to vim.
+export EDITOR=vim
+
+# VCode move file to trash upon delete
+export ELECTRON_TRASH=gio
+
+#======================#
+# Browser              #
+#======================#
+
+export BROWSER=chromium
+
+#======================#
+# Bash Prompt          #
+#======================#
+
+# Bash Prompt #1
+export PS1="\[$(tput bold)\]\[\033[38;5;2m\]\u\[$(tput sgr0)\]\[\033[38;5;15m\]@\[$(tput sgr0)\]\[$(tput sgr0)\]\[\033[38;5;39m\]\h\[$(tput bold)\]\[$(tput sgr0)\]\[\033[38;5;15m\]:[\[$(tput sgr0)\]\[$(tput sgr0)\]\[\033[38;5;7m\]\w\[$(tput bold)\]\[$(tput sgr0)\]\[\033[38;5;15m\]]:\[$(tput sgr0)\] \[$(tput sgr0)\]"
+
+#======================#
+# Git Prompt           #
+#======================#
+
+source ~/.bash-git-prompt/gitprompt.sh
+GIT_PROMPT_THEME=Solarized_UserHost
+GIT_PROMPT_ONLY_IN_REPO=1
+
+#======================#
+# Command Completion   #
+#======================#
+
+if [ -f /etc/bash_completion ]; then
+   . /etc/bash_completion
+fi
+
+#======================#
+# History              #
+#======================#
+
+HISTSIZE=5000000
+bind '"\e[A": history-search-backward'
+bind '"\e[B": history-search-forward'
+
+# Enable timed bash logging.
+export HISTTIMEFORMAT="%F %T "
+
+# Avoid History duplicates
+export HISTCONTROL=ignoredups:erasedups
+
+# When the shell exits, append to the history file instead of overwriting it
+shopt -s histappend
+
+# After each command, append to the history file and reread it
+PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
+
+# Store multiline commands as one line.
+shopt -s cmdhist
+
+source $HOME/.profile
+
+#======================#
+#      MISC            #
+#======================#
+
+# Suppressing “The default interactive shell is now zsh” message in macOS
+export BASH_SILENCE_DEPRECATION_WARNING=1

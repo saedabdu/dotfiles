@@ -1,0 +1,21 @@
+- defaults:
+    link:
+      force: true
+      create: true
+      relink: true
+
+# Check the home dir for dead symlinks into dotfiles and delete them
+- clean: ['~']
+
+- link:
+    ~/.bashrc: 'Darwin/bash/bashrc'
+    ~/.profile: 'Darwin/bash/profile'
+    ~/.bash_profile: 'Darwin/bash/bash_profile'
+    ~/.bash_aliases: 'Darwin/bash/bash_aliases'
+    ~/.bash-git-prompt: bash/bash-git-prompt/
+    ~/.inputrc: 'shell/inputrc'
+
+- shell:
+  - [git submodule update --init --recursive, Installing submodules]
+  - vim +PluginInstall +qall
+  - curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
