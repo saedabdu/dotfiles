@@ -31,6 +31,7 @@ alias ....="cd ../../.. && pwd"
 alias .....="cd ../../../.. && pwd"
 alias home="cd $HOME"
 lso(){ ls -la "$@" | awk '{k=0;for(i=0;i<=8;i++)k+=((substr($1,i+2,1)~/[rwx]/)*2^(8-i));if(k)printf(" %0o ",k);print}'; }
+
 # Git
 alias gs='git status '
 alias ga='git add '
@@ -43,6 +44,7 @@ alias gx='gitx --all'
 alias got='git '
 alias get='git '
 alias tig='git pull && tig'
+
 # Misc
 alias myip="wget http://ipinfo.io/ip -qO -"
 alias src='source ~/.bashrc'
