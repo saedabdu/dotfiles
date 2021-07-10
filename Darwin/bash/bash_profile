@@ -1,0 +1,15 @@
+#
+# ~/.bash_profile
+#
+
+#!/usr/bin/env bash
+
+# Read ~/.profile, if present.
+if [ -f ~/.profile ]; then
+      . ~/.profile
+fi
+
+# Read ~/.bashrc, if present.
+if [ -f ~/.bashrc ]; then
+      . ~/.bashrc
+fi
