@@ -18,5 +18,6 @@
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
+  - curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   - vim +PluginInstall +qall
   - curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
