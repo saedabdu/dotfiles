@@ -24,3 +24,4 @@ ssh
 
 # Misc
 *.old
+.vscode
