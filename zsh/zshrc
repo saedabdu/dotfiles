@@ -168,7 +168,7 @@ alias tig='git pull && tig'
 # misc
 alias myip="wget http://ipinfo.io/ip -qO -"
 alias watch='watch '
-alias src='source ~/.zsh'
+alias src='source ~/.zshrc'
 alias reach='ping 8.8.8.8'
 
 # helm
