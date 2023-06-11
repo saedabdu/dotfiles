@@ -16,7 +16,7 @@ export VIRTUALENVWRAPPER_VIRTUALENV=`which virtualenv`
 source $(which virtualenvwrapper.sh)
 
 #=======================#
-# Python Pyenv         #
+# Python Pyenv          #
 #=======================#
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
@@ -25,15 +25,24 @@ command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
 
-#========================
-#   GoLang              #
-#========================
+#========================#
+#   GoLang               #
+#========================#
 export GOROOT=/usr/local/go
 export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 
-#=======================
-# Home brew            #
-#=======================
+#=======================#
+# Home brew             #
+#=======================#
 export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/opt/homebrew/sbin:$PATH"
+
+
+#========================#
+# NVM                    #
+#========================#
+export NVM_DIR="$HOME/.nvm"
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+# This loads nvm bash_completion
+[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"

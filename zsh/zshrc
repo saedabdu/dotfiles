@@ -78,7 +78,6 @@ ZSH_THEME="robbyrussell"
 # HIST_STAMPS="mm/dd/yyyy"
 
 
-
 #======================#
 # History              #
 #======================#
@@ -111,7 +110,7 @@ plugins=(
     git
     bundler
     dotenv
-    #zsh-autosuggestions
+    zsh-autosuggestions
 )
 
 # User configuration
@@ -130,7 +129,6 @@ plugins=(
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
-
 
 
 #======================#
@@ -186,7 +184,7 @@ alias reach='ping 8.8.8.8'
 
 
 
-# Azire-cli completion
+# Azure-cli completion
 _az_python_argcomplete() {
     local IFS=$'\013'
     local SUPPRESS_SPACE=0
@@ -209,6 +207,9 @@ _az_python_argcomplete() {
 }
 
 source $ZSH/oh-my-zsh.sh
+
+source $(brew --prefix nvm)/nvm.sh
+
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
