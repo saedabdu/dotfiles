@@ -50,7 +50,7 @@ set incsearch                   " Highlight search results as the search is type
 set showcmd                     " Show command on the bottom
 set ruler                       " Show line and cursor position
 set listchars=tab:>-,trail:·    " Show tabs and trailing space
-set list                        " Enable the above settings
+"set list                        " Enable the above settings
 set laststatus=2                " Wider status line, needed for powerline
 syntax on                       " Enable syntax highlighting
 """""""""""""""""""""""""""""
@@ -99,4 +99,9 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
 
+nnoremap <C-n> :NERDTreeToggle<CR>
+" nnoremap <leader>n :NERDTreeFocus<CR>
+" nnoremap <C-n> :NERDTree<CR>
+" nnoremap <C-t> :NERDTreeToggle<CR>
+" nnoremap <C-f> :NERDTreeFind<CR>
 nnoremap <C-n> :NERDTreeToggle<CR>
