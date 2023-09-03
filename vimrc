@@ -77,7 +77,8 @@ endif
 " Run PlugInstall if there are missing plugins
 autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
   \| PlugInstall --sync | source $MYVIMRC
-\| endif
+autocmd StdinReadPre * let s:std_in=1
+  \| endif
 
 " Specify a directory for plugins
 " - Avoid using standard Vim directory names like 'plugin'
@@ -87,13 +88,13 @@ call plug#begin('~/.vim/plugged')
 
 " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
 
-Plug 'junegunn/vim-easy-align'
-            
+"Plug 'junegunn/vim-easy-align'
+
 Plug 'terryma/vim-smooth-scroll'
 
 Plug 'preservim/nerdtree' |
             \ Plug 'Xuyuanp/nerdtree-git-plugin' |
-            \ Plug 'ryanoasis/vim-devicons'            
+            \ Plug 'ryanoasis/vim-devicons'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 

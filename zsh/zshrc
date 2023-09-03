@@ -6,7 +6,6 @@ export ZSH="$HOME/.oh-my-zsh"
 
 #source ~/.zshrc
 
-
 # Remove username@hostname from terminal bar
 DISABLE_AUTO_TITLE="true"
 
@@ -162,6 +161,8 @@ alias gx='gitx --all'
 alias got='git'
 alias get='git'
 alias tig='git pull && tig'
+GPG_TTY=$(tty)
+export GPG_TTY
 
 # misc
 alias myip="wget http://ipinfo.io/ip -qO -"
