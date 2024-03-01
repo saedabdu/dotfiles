@@ -64,9 +64,9 @@ if [ -f /etc/bash_completion ]; then
 fi
 
 # Search PKGs not found
-if [ -f /usr/share/doc/pkgfile/command-not-found.bash ]; then
-source /usr/share/doc/pkgfile/command-not-found.bash
-fi
+#if [ -f /usr/share/doc/pkgfile/command-not-found.bash ]; then
+#source /usr/share/doc/pkgfile/command-not-found.bash
+#fi
 
 #======================#
 # History              #
@@ -95,3 +95,9 @@ shopt -s cmdhist
 shopt -s dirspell
 
 . $HOME/.profile
+
+# Get first completion and a listing you can add the following to bashrc
+
+bind 'set show-all-if-ambiguous on'
+bind 'TAB:menu-complete'
+bind 'TAB:menu-complete'
