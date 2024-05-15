@@ -3,7 +3,7 @@
 #
 
 # remove duplicat entries from $PATH
-# zsh uses $path array along with $PATH 
+# zsh uses $path array along with $PATH
 typeset -U PATH path
 
 #======================#
@@ -11,6 +11,7 @@ typeset -U PATH path
 #======================#
 
 PATH=$PATH:$HOME/bin
+
 
 # Additional PATH from a directory.
 #for d in $HOME/Scripts/*/; do
