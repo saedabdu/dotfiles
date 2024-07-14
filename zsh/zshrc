@@ -110,6 +110,7 @@ plugins=(
     bundler
     dotenv
     zsh-autosuggestions
+    asdf
 )
 
 # User configuration
