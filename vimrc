@@ -36,7 +36,7 @@ set smartindent                 " Smart C-like autoindenting
 set autoindent                  " automatically intend lines
 set copyindent                  " copy intend from previous line
 
-" Determine indentation rules by filetype
+" Determine indentation rules bxy filetype
 filetype plugin indent on
 
 
