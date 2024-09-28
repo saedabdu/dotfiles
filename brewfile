@@ -1,0 +1,58 @@
+# Specify app directory for cask applications
+cask_args appdir: '/Applications'
+
+# Taps
+tap 'homebrew/cask'
+tap 'homebrew/cask-fonts'
+tap 'neovim/neovim'
+
+# Shell Enhancements
+brew 'zsh-autosuggestions'
+brew 'keybase'
+brew 'bash-completion'
+
+# Vim/Neovim
+brew 'tree'
+brew 'neovim'
+
+# Python Setup
+brew 'pip-completion'
+brew 'pyenv'
+brew 'virtualenvwrapper'
+brew 'pyenv-virtualenvwrapper'
+
+# Node Setup
+brew 'nvm'
+brew 'node'
+
+# Network Tools
+brew 'wget'
+brew 'ggrep'
+
+# Git Tools
+brew 'git'
+brew 'pre-commit'
+
+# Kubernetes Tools
+brew 'kubectl'
+
+# Terraform and HashiCorp Tools
+brew 'tfenv'
+brew 'hashicorp/tap/terraform-ls'
+brew 'tflint'
+
+# Casks (Applications)
+cask 'google-chrome'
+cask 'skype'
+cask 'virtualbox'
+cask 'slack'
+cask 'spotify'
+cask 'kindle'
+cask '1password'
+cask 'iterm2'
+
+# Fonts
+brew 'font-hack-nerd-font'
+
+# Development Tools
+cask 'Xcode'
