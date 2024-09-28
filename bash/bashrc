@@ -96,8 +96,12 @@ shopt -s dirspell
 
 . $HOME/.profile
 
+
+#
+COMP_WORDBREAKS=" \t\n\"'@><=;|&(:"
+
 # Get first completion and a listing you can add the following to bashrc
 
 bind 'set show-all-if-ambiguous on'
 bind 'TAB:menu-complete'
-bind 'TAB:menu-complete'
+

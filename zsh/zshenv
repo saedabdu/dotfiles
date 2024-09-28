@@ -29,6 +29,11 @@ source $(which virtualenvwrapper.sh)
 #mkvirtualenv --python=/usr/local/bin/python3
 #rmvirtualenv python3env
 
+# Pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null `|| export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
 #=======================#
 # dotNet tools          #
 #=======================#
