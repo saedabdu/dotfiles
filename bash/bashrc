@@ -63,6 +63,17 @@ if [ -f /etc/bash_completion ]; then
    . /etc/bash_completion
 fi
 
+_my_command_completions() {
+  local cur prev opts
+  cur="${COMP_WORDS[COMP_CWORD]}"
+  prev="${COMP_WORDS[COMP_CWORD-1]}"
+  opts="start stop status restart"
+
+  # Generate completions based on the current input
+  COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+  return 0
+}
+
 # Search PKGs not found
 #if [ -f /usr/share/doc/pkgfile/command-not-found.bash ]; then
 #source /usr/share/doc/pkgfile/command-not-found.bash
@@ -81,6 +92,7 @@ export HISTTIMEFORMAT="%F %T "
 
 # Avoid History duplicates
 export HISTCONTROL=ignoredups:erasedups
+
 
 # When the shell exits, append to the history file instead of overwriting it
 shopt -s histappend
