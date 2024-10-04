@@ -3,7 +3,6 @@
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-source $ZSH/oh-my-zsh.sh
 
 #source ~/.zshrc
 
@@ -194,3 +193,5 @@ _az_python_argcomplete() {
         compopt -o nospace
     fi
 }
+
+source $ZSH/oh-my-zsh.sh
