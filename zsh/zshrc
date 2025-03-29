@@ -111,6 +111,7 @@ plugins=(
     dotenv
     zsh-autosuggestions
     kubectl
+    azure
     Kube-ps1
 )
 
