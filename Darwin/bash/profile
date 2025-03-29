@@ -30,7 +30,7 @@ eval "$(pyenv init -)"
 export WORKON_HOME=$HOME/.virtualenvs
 export VIRTUALENVWRAPPER_PYTHON=`which python3`
 export VIRTUALENVWRAPPER_VIRTUALENV=`which virtualenv`
-#source /usr/local/bin/virtualenvwrapper.sh
+source /usr/local/bin/virtualenvwrapper.sh
 source $(which virtualenvwrapper.sh)
 
 #mkvirtualenv --python=/usr/local/bin/python3
