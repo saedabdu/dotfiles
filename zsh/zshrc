@@ -110,6 +110,8 @@ plugins=(
     bundler
     dotenv
     zsh-autosuggestions
+    kubectl
+    Kube-ps1
 )
 
 # User configuration
