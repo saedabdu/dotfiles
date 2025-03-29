@@ -20,18 +20,20 @@ PATH=$PATH:$HOME/bin
 #=======================#
 # Python Virtualenv     #
 #=======================#
-export WORKON_HOME=$HOME/.virtualenvs
-export VIRTUALENVWRAPPER_PYTHON=`which python3`
-export VIRTUALENVWRAPPER_VIRTUALENV=`which virtualenv`
+# export WORKON_HOME=$HOME/.virtualenvs
+# export VIRTUALENVWRAPPER_PYTHON=`which python3`
+# export VIRTUALENVWRAPPER_VIRTUALENV=`which virtualenv`
 
 #=======================#
-# Python   Pyenv        #
+# Python Pyenv          #
 #=======================#
-
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-# eval "$(pyenv init -)"
+# export PYENV_ROOT="$HOME/.pyenv"
+# export PATH="$PYENV_ROOT/bin:$PATH"
+# command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+# export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
+# export WORKON_HOME=$HOME/.virtualenvs
+# pyenv virtualenvwrapper_lazy
+# # eval "$(pyenv init -)"
 
 #=======================#
 # dotNet tools          #
