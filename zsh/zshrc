@@ -110,10 +110,15 @@ plugins=(
     bundler
     dotenv
     zsh-autosuggestions
-    kubectl
     azure
+    kubectl
     Kube-ps1
-    1password
+    helm
+    gh
+    git-extras
+    golang
+    history
+    terraform
 )
 
 # User configuration
