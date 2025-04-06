@@ -119,6 +119,7 @@ plugins=(
     golang
     history
     terraform
+    1password
 )
 
 # User configuration
