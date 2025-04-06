@@ -113,6 +113,7 @@ plugins=(
     kubectl
     azure
     Kube-ps1
+    1password
 )
 
 # User configuration
@@ -202,3 +203,5 @@ autoload -U +X bashcompinit && bashcompinit
 autoload -U +X compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
 source $ZSH/oh-my-zsh.sh
+
+export SSH_AUTH_SOCK="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"

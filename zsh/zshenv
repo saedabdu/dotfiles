@@ -12,6 +12,8 @@ typeset -U PATH path
 
 PATH=$PATH:$HOME/bin
 
+export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
+
 # Additional PATH from a directory.
 #for d in $HOME/Scripts/*/; do
 #            PATH+=":$d"
@@ -95,3 +97,4 @@ if [ -s "/usr/local/opt/nvm/nvm.sh" ]; then
     export NVM_DIR="$HOME/.nvm"
     source "/usr/local/opt/nvm/nvm.sh"
 fi
+

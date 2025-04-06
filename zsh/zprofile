@@ -6,6 +6,7 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 export PATH="/opt/homebrew/bin:$PATH"
 
+export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
 #=======================#
 # Python Virtualenv     #
 #=======================#
@@ -27,7 +28,6 @@ export PATH="/opt/homebrew/bin:$PATH"
 # # eval "$(pyenv init -)"
 # eval "$(pyenv init --path)"
 
-
 #========================#
 #   GoLang               #
 #========================#
@@ -41,7 +41,6 @@ export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/opt/homebrew/sbin:$PATH"
 
-
 #========================#
 # NVM                    #
 #========================#
@@ -54,7 +53,6 @@ export NVM_DIR="$HOME/.nvm"
 #=======================#
 # RVM                   #
 #=======================#
-
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 PATH=$PATH:$HOME/.rvm/bin
 

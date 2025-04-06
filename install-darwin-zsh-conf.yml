@@ -18,6 +18,7 @@
 
 - shell:
   - git submodule update --remote
+  - 'if [ -L ~/.1password/agent.sock ]; then rm ~/.1password/agent.sock; fi && mkdir -p ~/.1password && if [ -e ~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock ]; then ln -s ~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock ~/.1password/agent.sock; else echo "1Password agent socket not found. Skipping symlink creation."; fi'
   - [git submodule update --init --recursive, Installing submodules]
  #- git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
   - curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim

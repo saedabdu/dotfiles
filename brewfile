@@ -4,7 +4,7 @@ cask_args appdir: '/Applications'
 # Taps
 tap 'homebrew/cask'
 tap 'homebrew/cask-fonts'
-tap 'neovim/neovim'
+tap 'neovim/neovim'`
 
 # Shell Enhancements
 brew 'zsh-autosuggestions'
@@ -18,7 +18,6 @@ brew 'neovim'
 # Python Setup
 brew 'pip-completion'
 brew 'pyenv'
-brew 'virtualenvwrapper'
 brew 'pyenv-virtualenvwrapper'
 
 # Node Setup
