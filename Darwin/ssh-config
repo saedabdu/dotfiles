@@ -1,0 +1,38 @@
+# Optional machine-local files, such as a VM SSH config.
+# A wildcard include is skipped when nothing matches.
+Include config.d/*
+
+# Personal GitHub account saedabdu.
+#   git@personalgit:saedabdu/dotfiles.git
+# Public key saved from 1Password: ~/.ssh/id_rsa_saedabdu.pub
+Host personalgit
+	HostName github.com
+	User git
+	IdentityFile ~/.ssh/id_rsa_saedabdu.pub
+	IdentitiesOnly yes
+	IdentityAgent ~/.1password/agent.sock
+
+# Work GitHub account saedabdu-ww.
+#   git@workgit:org/repo.git
+# Public key saved from 1Password: ~/.ssh/id_rsa_saedabdu-ww.pub
+Host workgit
+	HostName github.com
+	User git
+	IdentityFile ~/.ssh/id_rsa_saedabdu-ww.pub
+	IdentitiesOnly yes
+	IdentityAgent ~/.1password/agent.sock
+
+# Work Azure DevOps, same key as workgit.
+Host workgit-ado
+	HostName ssh.dev.azure.com
+	User git
+	IdentityFile ~/.ssh/id_rsa_saedabdu-ww.pub
+	IdentitiesOnly yes
+	IdentityAgent ~/.1password/agent.sock
+
+# git@github.com does not choose between the two accounts.
+Host github.com
+	HostName github.com
+	User git
+	PubkeyAuthentication no
+	IdentitiesOnly yes
