@@ -12,9 +12,11 @@
     ~/.zshenv:    'zsh/zshenv'
     ~/.zprofile:  'zsh/zprofile'
     ~/.vimrc:     'vimrc'
+    ~/.ssh/config: 'Darwin/ssh-config'
 
 - create:
     - ~/.vim/undo-history
+    - ~/.ssh/config.d
 
 - shell:
   - git submodule update --remote

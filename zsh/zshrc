@@ -208,6 +208,19 @@ alias reach='ping 8.8.8.8'
 autoload -U +X bashcompinit && bashcompinit
 autoload -U +X compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
-source $ZSH/oh-my-zsh.sh
 
-export SSH_AUTH_SOCK="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+# Verify op before oh-my-zsh's 1password plugin executes it.
+source "${${(%):-%x}:A:h}/op-guard.zsh"
+if whence -p op >/dev/null 2>&1; then
+  if op_trusted; then
+    unquarantine_op
+  else
+    op_trust_error
+    plugins=(${plugins:#1password})
+  fi
+fi
+
+source $ZSH/oh-my-zsh.sh
+op_guard_wrap_brew
+
+export SSH_AUTH_SOCK="$HOME/.1password/agent.sock"
