@@ -30,9 +30,14 @@ Host workgit-ado
 	IdentitiesOnly yes
 	IdentityAgent ~/.1password/agent.sock
 
-# git@github.com does not choose between the two accounts.
+# Repos that still use git@github.com. 1Password asks for the work key
+# first. Escape skips it and the personal key is offered next.
+# Folders that already include the personal or work Git config are
+# rewritten to personalgit or workgit, so only one key is offered.
 Host github.com
 	HostName github.com
 	User git
-	PubkeyAuthentication no
+	IdentityAgent ~/.1password/agent.sock
 	IdentitiesOnly yes
+	IdentityFile ~/.ssh/id_rsa_saedabdu-ww.pub
+	IdentityFile ~/.ssh/id_rsa_saedabdu.pub
